@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090817">
+
+    <title>MEEN FEENA | Party Game</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-glow"></div>
+
+    <header class="topbar">
+        <div class="logo">MEEN <span>FEENA</span></div>
+        <div class="version">PARTY GAME</div>
+    </header>
+
+    <main class="app-container">
+
+        <!-- HOME SCREEN -->
+        <section id="home" class="screen">
+
+            <div class="hero">
+                <div class="hero-badge">THE ULTIMATE FRIENDS GAME</div>
+
+                <h1>مين <span>فينا؟</span></h1>
+
+                <p>
+                    قرعة واحدة ممكن تقلب القعدة كلها!
+                    مستعدين تعرفوا مين عليه الدور؟
+                </p>
+            </div>
+
+            <div class="main-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h2>مين بيلعب؟</h2>
+                        <p>ضيفوا أصحابكم وابدأوا اللعبة</p>
+                    </div>
+
+                    <div class="player-counter">
+                        <span id="count">0</span>
+                        <small>PLAYERS</small>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <input
+                        type="text"
+                        id="playerName"
+                        placeholder="اكتب اسم اللاعب..."
+                        maxlength="20"
+                        autocomplete="off"
+                    >
+
+                    <button id="addPlayerBtn" class="add-btn">
+                        +
+                    </button>
+                </div>
+
+                <div id="playerList" class="player-list">
+                    <div class="empty-state">
+                        <span>👥</span>
+                        <p>لسه مفيش لاعبين.. ضيف أول لاعب!</p>
+                    </div>
+                </div>
+
+                <button id="startBtn" class="primary-btn" disabled>
+                    <span>ابدأ القرعة</span>
+                    <span>✦</span>
+                </button>
+
+                <p class="minimum-note">لازم يكون فيه لاعبين على الأقل</p>
+
+            </div>
+
+            <div class="rules">
+                <div class="rule-item">
+                    <span>🎲</span>
+                    <p>قرعة عشوائية</p>
+                </div>
+
+                <div class="rule-item">
+                    <span>🔥</span>
+                    <p>أسئلة جريئة</p>
+                </div>
+
+                <div class="rule-item">
+                    <span>⚡</span>
+                    <p>تحديات مضحكة</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- DRAW SCREEN -->
+        <section id="draw" class="screen hidden">
+
+            <div class="section-label">ROUND <span id="roundNumber">01</span></div>
+
+            <h2 class="screen-title">مين عليه الدور؟</h2>
+
+            <p class="screen-description">
+                بنسحب اسم عشوائي من الموجودين...
+            </p>
+
+            <div class="draw-card">
+
+                <div class="draw-icon">🎲</div>
+
+                <div id="drawName" class="draw-name">
+                    جاهزين؟
+                </div>
+
+                <div class="draw-status" id="drawStatus">
+                    جاري تجهيز القرعة...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUESTION SCREEN -->
+        <section id="question" class="screen hidden">
+
+            <div class="section-label">YOUR TURN</div>
+
+            <div class="selected-player">
+                <span>اللاعب المختار</span>
+                <h2 id="selectedPlayerName">يوسف</h2>
+            </div>
+
+            <div class="question-card">
+
+                <div class="question-icon">🔥</div>
+
+                <div class="question-label">السؤال عليك!</div>
+
+                <h2 id="questionText">
+                    السؤال هيظهر هنا
+                </h2>
+
+                <p class="question-hint">
+                    جاوب بصراحة أو اختار الرفض.. القرار ليك.
+                </p>
+
+            </div>
+
+            <div class="answer-actions">
+
+                <button id="answerBtn" class="primary-btn">
+                    هجاوب ✓
+                </button>
+
+                <button id="refuseBtn" class="secondary-btn">
+                    مش هجاوب
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ANSWER SCREEN -->
+        <section id="answer" class="screen hidden">
+
+            <div class="success-icon">✨</div>
+
+            <h2 class="screen-title">جدع! 👏</h2>
+
+            <p class="screen-description">
+                السؤال خلص.. مستعدين للجولة اللي بعدها؟
+            </p>
+
+            <div class="result-card">
+                <p>اللاعب</p>
+                <h2 id="answeredPlayerName"></h2>
+                <span>اختار يجاوب على السؤال</span>
+            </div>
+
+            <button id="nextAfterAnswerBtn" class="primary-btn">
+                اسحب اسم جديد 🎲
+            </button>
+
+        </section>
+
+
+        <!-- JUDGE SCREEN -->
+        <section id="judge" class="screen hidden">
+
+            <div class="section-label">THE JUDGE</div>
+
+            <h2 class="screen-title">اختارنا الحكم! ⚖️</h2>
+
+            <p class="screen-description">
+                بما إن اللاعب اختار الرفض، جه دور الحكم.
+            </p>
+
+            <div class="judge-card">
+
+                <div class="judge-icon">👑</div>
+
+                <p>الحكم هو</p>
+
+                <h2 id="judgeName">اسم الحكم</h2>
+
+            </div>
+
+            <div class="challenge-card">
+
+                <span class="challenge-label">YOUR CHALLENGE</span>
+
+                <h2 id="challengeText">
+                    التحدي هيظهر هنا
+                </h2>
+
+                <p>التحدي اختياري.. المهم تستمتعوا!</p>
+
+            </div>
+
+            <div class="judge-actions">
+
+                <button id="newChallengeBtn" class="secondary-btn">
+                    تحدي تاني 🔄
+                </button>
+
+                <button id="finishChallengeBtn" class="primary-btn">
+                    خلصنا.. اسحب جديد 🎲
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- EMPTY JUDGE SCREEN -->
+        <section id="noJudge" class="screen hidden">
+
+            <div class="success-icon">🎲</div>
+
+            <h2 class="screen-title">مفيش حكم متاح!</h2>
+
+            <p class="screen-description">
+                محتاجين لاعب تاني غير اللاعب المختار عشان يكون الحكم.
+            </p>
+
+            <button id="nextNoJudgeBtn" class="primary-btn">
+                اسحب اسم جديد
+            </button>
+
+        </section>
+
+
+        <!-- TOAST -->
+        <div id="toast" class="toast hidden"></div>
+
+    </main>
+
+    <footer>
+        <p>MEEN FEENA © 2026</p>
+        <span>MADE FOR GOOD TIMES</span>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
